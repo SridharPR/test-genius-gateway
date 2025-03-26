@@ -26,6 +26,7 @@ const Rating: React.FC<RatingProps> = ({ onChange, initialRating = 0 }) => {
           onMouseEnter={() => setHoverRating(star)}
           onMouseLeave={() => setHoverRating(0)}
           onClick={() => handleRating(star)}
+          aria-label={`Rate ${star} stars`}
         >
           <Star
             fill={(hoverRating || rating) >= star ? "#FFD700" : "none"}

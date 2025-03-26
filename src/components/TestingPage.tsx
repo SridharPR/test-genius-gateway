@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Home, Download, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -167,9 +168,10 @@ const TestingPage: React.FC<TestingPageProps> = ({ type, domain, onGoHome }) => 
 };
 
 function generateExampleScenarios(domain: string, type: 'api' | 'stress'): string {
-  if (domain === 'Loans') {
-    if (type === 'api') {
-      return `# Loans API Testing Scenarios
+  switch (domain) {
+    case 'Loans':
+      if (type === 'api') {
+        return `# Loans API Testing Scenarios
 
 1. Test loan application submission API with valid data
 2. Test loan application submission API with invalid data
@@ -186,8 +188,8 @@ function generateExampleScenarios(domain: string, type: 'api' | 'stress'): strin
 13. Test document upload API with valid file formats
 14. Test document upload API with invalid file formats
 15. Verify loan eligibility check API with various income levels`;
-    } else {
-      return `# Loans Stress Testing Scenarios
+      } else {
+        return `# Loans Stress Testing Scenarios
 
 1. Test system performance with 1000 concurrent loan applications
 2. Verify system stability during peak hours (10,000+ users)
@@ -204,13 +206,209 @@ function generateExampleScenarios(domain: string, type: 'api' | 'stress'): strin
 13. Test cache performance under heavy load
 14. Verify backup and recovery procedures under stress conditions
 15. Test search functionality with large result sets (50,000+ items)`;
-    }
-  } else {
-    if (type === 'api') {
-      return `# ${domain} API Testing Scenarios\n\n1. Test endpoint authentication and authorization\n2. Verify correct data retrieval from API endpoints\n3. Test data creation through API with valid inputs\n4. Test API behavior with invalid inputs\n5. Verify API response formats and status codes\n`;
-    } else {
-      return `# ${domain} Stress Testing Scenarios\n\n1. Test system performance under heavy load\n2. Verify system stability during peak usage periods\n3. Test database performance with large datasets\n4. Verify system recovery after failures\n5. Test concurrent user capacity\n`;
-    }
+      }
+    
+    case 'Deposits':
+      if (type === 'api') {
+        return `# Deposits API Testing Scenarios
+
+1. Test deposit account creation API with valid customer data
+2. Test deposit account creation API with invalid customer data
+3. Verify deposit transaction API with valid amount and account
+4. Test withdrawal transaction API with sufficient balance
+5. Test withdrawal transaction API with insufficient balance
+6. Verify account balance retrieval API returns accurate information
+7. Test interest calculation API for different account types
+8. Test account statement generation API for specified date ranges
+9. Verify transaction history API returns all transactions correctly
+10. Test account closure API with zero balance
+11. Test account closure API with non-zero balance
+12. Verify beneficiary addition API with valid details
+13. Test recurring deposit schedule API with valid parameters
+14. Test transaction limits enforcement API
+15. Verify multi-currency deposit account API functionality`;
+      } else {
+        return `# Deposits Stress Testing Scenarios
+
+1. Test system performance with 5000 concurrent deposit transactions
+2. Verify system stability during month-end interest calculations
+3. Test database performance with 10 million transaction records
+4. Verify API response times under heavy load (10,000+ requests/minute)
+5. Test system recovery after payment gateway failure
+6. Verify transaction processing pipeline with 20,000 queued operations
+7. Test system behavior during database replication lag
+8. Verify statement generation system with 50,000 concurrent requests
+9. Test batch processing system with large transaction volumes
+10. Verify reporting system with massive datasets (500,000+ records)
+11. Test system behavior during partial microservice outages
+12. Verify data consistency during high-volume transaction periods
+13. Test caching mechanisms under heavy read operations
+14. Verify backup and recovery procedures under peak conditions
+15. Test search and filtering with complex queries on large datasets`;
+      }
+      
+    case 'Credit Risks':
+      if (type === 'api') {
+        return `# Credit Risks API Testing Scenarios
+
+1. Test credit score calculation API with various customer profiles
+2. Test risk assessment API for new loan applications
+3. Verify fraud detection API with known fraud patterns
+4. Test credit limit recommendation API based on customer history
+5. Test risk categorization API for different customer segments
+6. Verify portfolio risk analysis API returns accurate metrics
+7. Test early warning system API for detecting deteriorating credits
+8. Test collateral valuation API with different asset types
+9. Verify regulatory compliance check API for risk reporting
+10. Test stress testing API with various economic scenarios
+11. Test risk model calibration API with historical data
+12. Verify concentration risk calculation API for sector exposures
+13. Test probability of default API with current market conditions
+14. Test loss given default calculation API for different collateral types
+15. Verify credit monitoring API for existing customer portfolio`;
+      } else {
+        return `# Credit Risks Stress Testing Scenarios
+
+1. Test system performance with 2000 concurrent risk assessments
+2. Verify system stability during economic downturn simulations
+3. Test database performance with complex risk calculations on 5 million accounts
+4. Verify API response times under heavy analytical workloads
+5. Test system recovery after model service failures
+6. Verify risk calculation pipeline with 10,000 queued assessments
+7. Test system behavior during data feed disruptions
+8. Verify batch risk recalculation for entire portfolio (1 million+ accounts)
+9. Test model validation system with massive historical datasets
+10. Verify reporting system with comprehensive risk metrics calculations
+11. Test system behavior during market volatility simulations
+12. Verify data consistency during parallel risk calculations
+13. Test machine learning model inference under heavy load
+14. Verify backup and recovery procedures for risk data warehouse
+15. Test performance with multiple concurrent stress testing scenarios`;
+      }
+      
+    case 'Regulatory Compliances':
+      if (type === 'api') {
+        return `# Regulatory Compliances API Testing Scenarios
+
+1. Test KYC verification API with valid customer identification
+2. Test AML screening API against watchlists
+3. Verify transaction monitoring API for suspicious activities
+4. Test regulatory reporting API for different jurisdictions
+5. Test consent management API for customer data processing
+6. Verify data retention policy enforcement API
+7. Test GDPR compliance API for data subject access requests
+8. Test sanctions screening API with various entity types
+9. Verify regulatory filing generation API with accurate data
+10. Test risk-based compliance assessment API
+11. Test compliance attestation API for internal controls
+12. Verify audit trail API for compliance activities
+13. Test regulatory change management API
+14. Test compliance training verification API
+15. Verify cross-border transaction compliance API`;
+      } else {
+        return `# Regulatory Compliances Stress Testing Scenarios
+
+1. Test system performance with 3000 concurrent compliance checks
+2. Verify system stability during regulatory reporting deadlines
+3. Test database performance with complex compliance queries on historical data
+4. Verify API response times under heavy compliance screening load
+5. Test system recovery after compliance service disruptions
+6. Verify regulatory reporting pipeline under peak period loads
+7. Test system behavior during watchlist update propagation
+8. Verify transaction monitoring with high volume transaction flows
+9. Test compliance detection systems with sophisticated evasion patterns
+10. Verify reporting generation with tight regulatory deadlines
+11. Test system behavior during regulatory audit examinations
+12. Verify data consistency during compliance rule updates
+13. Test AI-based compliance monitoring under heavy load
+14. Verify backup and recovery procedures for compliance evidence
+15. Test search and retrieval of compliance records under audit conditions`;
+      }
+      
+    case 'Assets Liability Management':
+      if (type === 'api') {
+        return `# Assets Liability Management API Testing Scenarios
+
+1. Test liquidity ratio calculation API with current balance sheet data
+2. Test interest rate risk measurement API with yield curve shifts
+3. Verify cash flow projection API with contractual maturities
+4. Test capital adequacy ratio calculation API
+5. Test funding concentration analysis API by source
+6. Verify maturity gap analysis API for different time buckets
+7. Test net interest income simulation API with rate scenarios
+8. Test stress testing API for liquidity under market stress
+9. Verify transfer pricing calculation API for internal funds
+10. Test contingency funding plan activation API
+11. Test early warning indicator monitoring API
+12. Verify behavioral modeling API for non-maturing deposits
+13. Test IRRBB (Interest Rate Risk in Banking Book) calculation API
+14. Test liquidity coverage ratio (LCR) calculation API
+15. Verify net stable funding ratio (NSFR) calculation API`;
+      } else {
+        return `# Assets Liability Management Stress Testing Scenarios
+
+1. Test system performance with complex ALM calculations across entire balance sheet
+2. Verify system stability during market stress simulations
+3. Test database performance with historical balance sheet data (10+ years)
+4. Verify API response times under heavy analytical model executions
+5. Test system recovery after risk model service failures
+6. Verify ALM calculation pipeline with multiple concurrent scenarios
+7. Test system behavior during market data feed disruptions
+8. Verify Monte Carlo simulation engine with 10,000+ iterations
+9. Test capital planning models under extreme market conditions
+10. Verify reporting system with comprehensive ALM metrics
+11. Test system behavior during liquidity crisis simulations
+12. Verify data consistency across risk and finance data domains
+13. Test stochastic modeling engines under heavy computational load
+14. Verify backup and recovery procedures for ALM analytical datasets
+15. Test performance with multiple concurrent regulatory stress tests`;
+      }
+      
+    case 'Customer Information':
+      if (type === 'api') {
+        return `# Customer Information API Testing Scenarios
+
+1. Test customer profile creation API with valid data
+2. Test customer profile update API with authorized credentials
+3. Verify customer search API with various search criteria
+4. Test customer relationship API for household connections
+5. Test customer preference management API
+6. Verify customer document retrieval API with proper authentication
+7. Test customer activity log API with date filtering
+8. Test customer onboarding workflow API
+9. Verify customer segmentation API based on attributes
+10. Test customer contact information validation API
+11. Test customer consent management API for marketing
+12. Verify customer authentication API with multi-factor options
+13. Test customer product eligibility API
+14. Test customer feedback collection API
+15. Verify customer communication preference API`;
+      } else {
+        return `# Customer Information Stress Testing Scenarios
+
+1. Test system performance with 10,000 concurrent customer profile retrievals
+2. Verify system stability during customer data migration
+3. Test database performance with 50 million customer records
+4. Verify API response times under heavy customer service center load
+5. Test system recovery after customer master data service failure
+6. Verify customer search functionality with complex query patterns
+7. Test system behavior during peak onboarding periods
+8. Verify batch processing with large customer data updates
+9. Test customer segmentation engine with complex rules on full customer base
+10. Verify reporting system with comprehensive customer analytics
+11. Test system behavior during marketing campaign launches
+12. Verify data consistency during concurrent profile updates
+13. Test machine learning-based recommendation engine under load
+14. Verify backup and recovery procedures for customer data
+15. Test performance of customer 360-view generation for service representatives`;
+      }
+      
+    default:
+      if (type === 'api') {
+        return `# ${domain} API Testing Scenarios\n\n1. Test endpoint authentication and authorization\n2. Verify correct data retrieval from API endpoints\n3. Test data creation through API with valid inputs\n4. Test API behavior with invalid inputs\n5. Verify API response formats and status codes\n`;
+      } else {
+        return `# ${domain} Stress Testing Scenarios\n\n1. Test system performance under heavy load\n2. Verify system stability during peak usage periods\n3. Test database performance with large datasets\n4. Verify system recovery after failures\n5. Test concurrent user capacity\n`;
+      }
   }
 }
 

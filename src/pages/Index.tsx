@@ -95,7 +95,7 @@ const Index = () => {
             Future Enhancements
           </h2>
           
-          <ul className="space-y-3 text-sm text-gray-600">
+          <ul className="space-y-3 text-sm text-gray-600 flex flex-col items-center">
             <li className="flex items-baseline">
               <span className="mr-2 text-primary">•</span>
               <span>Expanding to wider domains in software industry</span>

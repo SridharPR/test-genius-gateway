@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Home, Download, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CustomButton from './CustomButton';
 import Rating from './Rating';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 
 interface TestingPageProps {
   type: 'api' | 'stress';
@@ -18,9 +17,7 @@ const TestingPage: React.FC<TestingPageProps> = ({ type, domain, onGoHome }) => 
   const [additionalRequirements, setAdditionalRequirements] = useState('');
   const [showRating, setShowRating] = useState(false);
   
-  // Simulate loading and generating test scenarios
   useEffect(() => {
-    // Simulate API call
     setIsLoading(true);
     
     const timer = setTimeout(() => {
@@ -39,7 +36,6 @@ const TestingPage: React.FC<TestingPageProps> = ({ type, domain, onGoHome }) => 
     }
     
     setIsLoading(true);
-    // Simulate API call with additional requirements
     setTimeout(() => {
       const newScenarios = generateExampleScenarios(domain, type) + 
         `\n\nAdditional scenarios based on your requirements:\n${generateAdditionalScenarios(additionalRequirements)}`;
@@ -50,7 +46,6 @@ const TestingPage: React.FC<TestingPageProps> = ({ type, domain, onGoHome }) => 
   };
   
   const handleDownload = () => {
-    // Create HTML content
     const htmlContent = `
       <!DOCTYPE html>
       <html lang="en">
@@ -74,7 +69,6 @@ const TestingPage: React.FC<TestingPageProps> = ({ type, domain, onGoHome }) => 
       </html>
     `;
     
-    // Create a blob and download
     const blob = new Blob([htmlContent], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -172,7 +166,6 @@ const TestingPage: React.FC<TestingPageProps> = ({ type, domain, onGoHome }) => 
   );
 };
 
-// Helper functions to generate test scenarios
 function generateExampleScenarios(domain: string, type: 'api' | 'stress'): string {
   if (domain === 'Loans') {
     if (type === 'api') {
@@ -222,7 +215,6 @@ function generateExampleScenarios(domain: string, type: 'api' | 'stress'): strin
 }
 
 function generateAdditionalScenarios(requirements: string): string {
-  // In a real application, this would call the AI API
   return `1. Custom test for ${requirements.split(' ').slice(0, 3).join(' ')}...\n2. Specific scenario for ${requirements.split(' ').slice(-3).join(' ')}...\n3. Edge case testing for given requirements...\n4. Validation testing for specific business rules...\n5. Boundary testing for specified conditions...`;
 }
 
